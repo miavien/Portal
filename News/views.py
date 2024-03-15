@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from datetime import datetime
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django_filters.views import FilterView
@@ -53,12 +53,39 @@ class PostCreate(CreateView):
     model = Post
     template_name = 'flatpages/post_edit.html'
 
+    def form_valid(self, form):
+        post = form.save(commit=False)
+        post.type = Post.news
+        post.save()
+        return redirect('post_detail', id=post.pk)
+
+class ArticleCreate(CreateView):
+    form_class = ArticleForm
+    model = Post
+    template_name = 'flatpages/article_edit.html'
+
+    def form_valid(self, form):
+        post = form.save(commit=False)
+        post.type = Post.articles
+        post.save()
+        return redirect('post_detail', id=post.pk)
+
 class PostUpdate(UpdateView):
     form_class = PostForm
     model = Post
     template_name = 'flatpages/post_edit.html'
 
+class ArticleUpdate(UpdateView):
+    form_class = ArticleForm
+    model = Post
+    template_name = 'flatpages/article_edit.html'
+
 class PostDelete(DeleteView):
     model = Post
     template_name = 'flatpages/post_delete.html'
+    success_url = reverse_lazy('post_list')
+
+class ArticleDelete(DeleteView):
+    model = Post
+    template_name = 'flatpages/article_delete.html'
     success_url = reverse_lazy('post_list')
