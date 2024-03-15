@@ -4,14 +4,18 @@
 {% load custom_tags %}
 
 {% block title %}
-Posts
+Search
 {% endblock title %}
 
 {% block content %}
-   <h1>Все новости ({{ posts|length }})</h1>
+   <h1>Все новости ({{ search|length }})</h1>
    <h4>{% current_time '%b %d %Y' %}</h4>
+    <form action="" method="get">
+       {{ filterset.form.as_p }}
+       <input type="submit" value="Найти" />
+   </form>
    <hr>
-   {% if posts %}
+   {% if search %}
        <table style="margin: 0 auto; width: 80%;">
            <tr>
                <td>Заголовок</td>
@@ -19,7 +23,7 @@ Posts
                <td>Содержание</td>
            </tr>
 
-           {% for post in posts %}
+           {% for post in search %}
            <tr>
                <td>{{ post.title_of_news|censor }}</td>
                <td>{{ post.date_in|date:'d M Y' }}</td>
