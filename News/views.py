@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from datetime import datetime
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django_filters.views import FilterView
+from django.urls import reverse_lazy
 
 from .models import *
 from .filters import *
@@ -51,3 +52,13 @@ class PostCreate(CreateView):
     form_class = PostForm
     model = Post
     template_name = 'flatpages/post_edit.html'
+
+class PostUpdate(UpdateView):
+    form_class = PostForm
+    model = Post
+    template_name = 'flatpages/post_edit.html'
+
+class PostDelete(DeleteView):
+    model = Post
+    template_name = 'flatpages/post_delete.html'
+    success_url = reverse_lazy('post_list')
