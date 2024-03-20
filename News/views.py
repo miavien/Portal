@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
-from datetime import datetime
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django_filters.views import FilterView
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import *
 from .filters import *
@@ -70,12 +70,12 @@ class ArticleCreate(CreateView):
         post.save()
         return redirect('post_detail', id=post.pk)
 
-class PostUpdate(UpdateView):
+class PostUpdate(LoginRequiredMixin ,UpdateView):
     form_class = PostForm
     model = Post
     template_name = 'flatpages/post_edit.html'
 
-class ArticleUpdate(UpdateView):
+class ArticleUpdate(LoginRequiredMixin, UpdateView):
     form_class = ArticleForm
     model = Post
     template_name = 'flatpages/article_edit.html'
