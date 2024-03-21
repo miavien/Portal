@@ -1,0 +1,16 @@
+{% extends "flatpages/default.html" %}
+
+{% load socialaccount %}
+
+{% block content %}
+<h2> Регистрация </h2>
+<form method="post">
+{% csrf_token %}
+{{ form.as_p }}
+
+<!-- Добавляем кнопку для авторизации через Яндекс -->
+<a href="{% provider_login_url 'yandex' %}">Войти через Яндекс</a>
+
+<input type="submit" value="Продолжить">
+</form>
+{% endblock %}

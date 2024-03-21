@@ -23,7 +23,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Home
                         <span class="sr-only">(current)</span>
@@ -31,15 +31,18 @@
                 </li>
                 {% if not user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'login' %}">Войти</a>
+                    <a class="nav-link" href="{% url 'account_login' %}">Войти</a>
                 </li>
                 {% else %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'logout_confirm' %}">Выйти</a>
                 </li>
                 {% endif %}
+                {% if is_not_authors and user.is_authenticated %}
                 <li class="nav-item">
+                    <a class="nav-link" href="{% url 'upgrade' %}">Стать автором</a>
                 </li>
+                {% endif %}
             </ul>
         </div>
     </div>
