@@ -15,6 +15,7 @@ Posts
        <table style="margin: 0 auto; width: 80%;">
            <tr>
                <td>Заголовок</td>
+               <td>Категории</td>
                <td>Тип</td>
                <td>Дата публикации</td>
                <td>Содержание</td>
@@ -23,6 +24,11 @@ Posts
            {% for post in posts %}
            <tr>
                <td>{{ post.title_of_news|censor }}</td>
+               <td>
+                   {% for category in post.category.all %}
+                        <a href="{% url 'category_list' category.id %}">{{ category }}</a>
+                   {% endfor %}
+               </td>
                <td>{{ post.get_type_display }}</td>
                <td>{{ post.date_in|date:'d M Y' }}</td>
                <td>{{ post.text|truncatechars:20|censor }}</td>

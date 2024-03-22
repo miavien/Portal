@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.flatpages',
-    'News',
+    'News.apps.NewsConfig',
     'django_filters',
     'sign',
     'protect',
@@ -155,3 +155,12 @@ ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_FORMS = {'signup': 'sign.models.BasicSignupForm'}
+
+SITE_URL = 'http://127.0.0.1:8000'
+
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'kiunina'
+EMAIL_HOST_PASSWORD = 'my_password'
+EMAIL_USE_SSL = True
+DEFAULT_FROM_EMAIL = 'kiunina@yandex.ru'
