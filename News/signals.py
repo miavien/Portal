@@ -1,9 +1,10 @@
 from django.core.mail import EmailMultiAlternatives
-from django.db.models.signals import m2m_changed
+from django.db.models.signals import m2m_changed, post_save
 from django.dispatch import receiver
 from django.template.loader import render_to_string
+from django.utils import timezone
 
-from News.models import PostCategory
+from News.models import *
 from NewsPortal import settings
 
 
@@ -38,3 +39,12 @@ def notify_about_new_post(sender, instance, **kwargs):
             subscribers_emails += [s.email for s in subscribers]
 
         send_notifications(instance.preview(), instance.pk, instance.title_of_news, subscribers_emails)
+
+@receiver(post_save, sender=Post)
+def count_posts(sender, instance, created, **kwargs):
+    if created:
+        user = instance.author
+        today = timezone.now().date()
+        posts_today = Post.objects.filter(author=user, date_in__date=today).count()
+        if posts_today > 3:
+            raise ValueError('Превышено максимальное количество постов в день!')

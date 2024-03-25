@@ -53,7 +53,10 @@ class Post(models.Model):
         self.save()
 
     def preview(self):
-        return self.text[0:124] + '...'
+        if len(self.text) > 124:
+            return self.text[0:124] + '...'
+        else:
+            return self.text
 
     def __str__(self):
         return f'{self.title_of_news.title()}: {self.preview()}'
