@@ -14,6 +14,11 @@ class PostForm(forms.ModelForm):
             'author',
         ]
 
+    # def __init__(self, *args, **kwargs):
+    #     super(PostForm, self).__init__(*args, **kwargs)
+    #     authors = Author.objects.filter(user__groups__name='authors')
+    #     self.fields['author'].queryset = authors
+
     def clean(self):
         cleaned_data = super().clean()
         text = cleaned_data.get('text')
