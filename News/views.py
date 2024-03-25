@@ -107,6 +107,9 @@ def upgrade_me(request):
     authors_group = Group.objects.get(name='authors')
     if not request.user.groups.filter(name='authors').exists():
         authors_group.user_set.add(user)
+    #при нажатии "стать автором" добавляется в модель Author
+    if not Author.objects.filter(user=user).exists():
+        Author.objects.create(user=user)
     return redirect('/news/')
 
 class CategoryList(PostsList):
