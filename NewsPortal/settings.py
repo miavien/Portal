@@ -160,7 +160,11 @@ SITE_URL = 'http://127.0.0.1:8000'
 
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
-EMAIL_HOST_USER = 'kiunina'
-EMAIL_HOST_PASSWORD = 'my_password'
+EMAIL_HOST_USER = 'kiunina@yandex.ru'
+EMAIL_HOST_PASSWORD = 'ixtuidabgrmvrbqz'
 EMAIL_USE_SSL = True
-DEFAULT_FROM_EMAIL = 'kiunina@yandex.ru'
+EMAIL_SERVER = EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+EMAIL_ADMIN = EMAIL_HOST_USER
+
+# EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"

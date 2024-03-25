@@ -20,7 +20,7 @@ class PostForm(forms.ModelForm):
         title_of_news = cleaned_data.get('title_of_news')
 
         if title_of_news == text:
-            raise ValidationError('Текст новости не должен быть индентичным названию')
+            raise ValidationError('Текст новости не должен быть идентичным названию')
 
         return cleaned_data
 

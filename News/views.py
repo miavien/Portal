@@ -57,9 +57,9 @@ class PostCreate(CreateView, PermissionRequiredMixin):
 
     def form_valid(self, form):
         post = form.save(commit=False)
-        post.type = Post.news
+        # post.type = Post.news
         post.save()
-        return redirect('post_detail', id=post.pk)
+        return super().form_valid(form)
 
 
 class ArticleCreate(CreateView, PermissionRequiredMixin):
@@ -72,7 +72,7 @@ class ArticleCreate(CreateView, PermissionRequiredMixin):
         post = form.save(commit=False)
         post.type = Post.articles
         post.save()
-        return redirect('post_detail', id=post.pk)
+        return super().form_valid(form)
 
 
 class PostUpdate(LoginRequiredMixin, UpdateView, PermissionRequiredMixin):
