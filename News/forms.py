@@ -16,14 +16,13 @@ class PostForm(forms.ModelForm):
         ]
 
     def clean_text(self):
-        cleaned_data = super().clean()
-        text = cleaned_data.get('text')
-        title_of_news = cleaned_data.get('title_of_news')
+        text = self.cleaned_data.get('text')
+        title_of_news = self.cleaned_data.get('title_of_news')
 
         if title_of_news == text:
-            raise ValidationError('Текст новости не должен быть идентичным названию')
+            raise ValidationError('Текст статьи не должен быть индентичным названию')
 
-        return cleaned_data
+        return text
 
     def clean(self):
         cleaned_data = super().clean()
@@ -47,20 +46,19 @@ class ArticleForm(forms.ModelForm):
         ]
 
     def clean_text(self):
-        cleaned_data = super().clean()
-        text = cleaned_data.get('text')
-        title_of_news = cleaned_data.get('title_of_news')
+        text = self.cleaned_data.get('text')
+        title_of_news = self.cleaned_data.get('title_of_news')
 
         if title_of_news == text:
             raise ValidationError('Текст статьи не должен быть индентичным названию')
 
-        return cleaned_data
+        return text
 
     def clean(self):
         cleaned_data = super().clean()
         author = cleaned_data.get('author')
         today = datetime.date.today()
         posts_limit = Post.objects.filter(author=author, date_in__date=today).count()
-        if posts_limit > 3:
+        if posts_limit > 10:
             raise ValidationError('Превышено максимальное количество постов в день!')
         return cleaned_data
