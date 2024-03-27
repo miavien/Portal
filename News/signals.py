@@ -40,10 +40,3 @@ def notify_about_new_post(sender, instance, **kwargs):
             subscribers_emails += [s.email for s in subscribers]
 
         send_notifications(instance.preview(), instance.pk, instance.title_of_news, subscribers_emails)
-
-# @receiver(post_save, sender=Post)
-# def post_limit(sender, instance, **kwargs):
-#     today = datetime.date.today()
-#     posts_limit = Post.objects.filter(author=instance.author, date_in__date=today).count()
-#     if posts_limit > 3:
-#         raise ValidationError('Превышено максимальное количество постов в день!')
