@@ -29,7 +29,7 @@ class PostForm(forms.ModelForm):
         author = cleaned_data.get('author')
         today = datetime.date.today()
         posts_limit = Post.objects.filter(author=author, date_in__date=today).count()
-        if posts_limit > 3:
+        if posts_limit > 10:
             raise ValidationError('Превышено максимальное количество постов в день!')
         return cleaned_data
 
