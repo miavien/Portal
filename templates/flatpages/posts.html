@@ -23,7 +23,9 @@ Posts
 
            {% for post in posts %}
            <tr>
-               <td>{{ post.title_of_news|censor }}</td>
+               <td>
+                   <a href="{% url 'post_detail' post.pk %}">{{ post.title_of_news|censor }}</a>
+               </td>
                <td>
                    {% for category in post.category.all %}
                         <a href="{% url 'category_list' category.id %}">{{ category }}</a>

@@ -18,10 +18,11 @@ class PostDetail(DetailView):
     pk_url_kwarg = 'id'
 
     def get_object(self, *args, **kwargs):
-        obj = cache.get(f'post-{self.kwargs['pk']}, None')
+        obj = cache.get(f'post-{self.kwargs['id']}', None)
         if not obj:
             obj = super().get_object(queryset=self.queryset)
-            cache.set(f'post-{self.kwargs['pk']}, obj')
+            cache.set(f'post-{self.kwargs['id']}', obj)
+        return obj
 
 
 class PostsList(ListView):
