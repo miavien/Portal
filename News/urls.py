@@ -2,6 +2,7 @@ from django.urls import path
 # Импортируем созданные нами представления
 from .views import *
 from django.views.decorators.cache import cache_page
+from django.views.i18n import set_language
 
 urlpatterns = [
    path('news/', cache_page(60)(PostsList.as_view()), name='post_list'),
@@ -16,4 +17,5 @@ urlpatterns = [
    path('upgrade/', upgrade_me, name='upgrade'),
    path('news/categories/<int:pk>', CategoryList.as_view(), name='category_list'),
    path('news/categories/<int:pk>/subscribe', subscribe, name='subscribe'),
+   path('set-language/', set_language, name='set_language'),
 ]

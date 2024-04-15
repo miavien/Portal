@@ -39,6 +39,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'modeltranslation',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -66,6 +67,8 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     #Включает механизм сессий в разрабатываемом приложении.
     'django.contrib.sessions.middleware.SessionMiddleware',
+    #локализация
+    'django.middleware.locale.LocaleMiddleware',
     #позволяет выполнять стандартные процедуры над URL (приведение к единому шаблону с учетом слэшей и www в начале)
     'django.middleware.common.CommonMiddleware',
     #Включает проверку безопасности от угроз типа CSRF
@@ -143,6 +146,15 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
+
+LANGUAGES = [
+    ('en', 'English'),
+    ('ru', 'Русский'),
+]
+
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale')
+]
 
 TIME_ZONE = 'UTC'
 

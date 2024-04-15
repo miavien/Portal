@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_available_languages as LANGUAGES %}
+
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
@@ -13,6 +16,16 @@
 </head>
 <body>
 <!-- Responsive navbar-->
+<form method="post" action="{% url 'set_language' %}">
+  {% csrf_token %}
+  <input type="hidden" name="next" value="{{ request.path }}">
+  <select name="language">
+    {% for lang_code, lang_name in LANGUAGES %}
+      <option value="{{ lang_code }}">{{ lang_name }}</option>
+    {% endfor %}
+  </select>
+  <button type="submit">Выбрать</button>
+</form>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
     <div class="container">
         <a class="navbar-brand" href="#">Django flatpages</a>
@@ -29,23 +42,21 @@
                     <span class="nav-link">{{ user.username }}</span>
                 </li>
                 {% endif %}
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home
-                        <span class="sr-only">(current)</span>
-                    </a>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'post_list' %}">{% trans "Все новости" %}</a>
                 </li>
                 {% if not user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'account_login' %}">Войти</a>
+                    <a class="nav-link" href="{% url 'account_login' %}">{% trans 'Войти' %}</a>
                 </li>
                 {% else %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'logout_confirm' %}">Выйти</a>
+                    <a class="nav-link" href="{% url 'logout_confirm' %}">{% trans 'Выйти' %}</a>
                 </li>
                 {% endif %}
                 {% if is_not_authors and user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'upgrade' %}">Стать автором</a>
+                    <a class="nav-link" href="{% url 'upgrade' %}">{% trans 'Стать автором' %}</a>
                 </li>
                 {% endif %}
             </ul>
