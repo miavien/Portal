@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import *
+from modeltranslation.admin import TranslationAdmin
 
 class AuthorAdmin(admin.ModelAdmin):
     list_display = ['user', 'rating']
@@ -14,9 +15,15 @@ class PostAdmin(admin.ModelAdmin):
 
     get_categories.short_description = 'Categories'
 
+class PostTransAdmin(PostAdmin, TranslationAdmin):
+    model = Post
+
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['name_category']
     list_filter = ['name_category']
+
+class CategoryTransAdmin(CategoryAdmin, TranslationAdmin):
+    model = Category
 
 class PostCategoryAdmin(admin.ModelAdmin):
     list_display = ['get_post_title', 'get_category_name']
@@ -40,8 +47,8 @@ class CommentAdmin(admin.ModelAdmin):
 
 
 # Register your models here.
-admin.site.register(Post, PostAdmin)
-admin.site.register(Category, CategoryAdmin)
+admin.site.register(Post, PostTransAdmin)
+admin.site.register(Category, CategoryTransAdmin)
 admin.site.register(Author, AuthorAdmin)
 admin.site.register(Comment, CommentAdmin)
 admin.site.register(PostCategory, PostCategoryAdmin)

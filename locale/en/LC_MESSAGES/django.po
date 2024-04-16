@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-15 16:37+0700\n"
+"POT-Creation-Date: 2024-04-15 19:06+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,18 +18,18 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\templates\flatpages\default.html:34
+#: .\templates\flatpages\default.html:46
 msgid "Все новости"
 msgstr "News"
 
-#: .\templates\flatpages\default.html:38
+#: .\templates\flatpages\default.html:50
 msgid "Войти"
 msgstr "Log in"
 
-#: .\templates\flatpages\default.html:42
+#: .\templates\flatpages\default.html:54
 msgid "Выйти"
 msgstr "Log out"
 
-#: .\templates\flatpages\default.html:47
+#: .\templates\flatpages\default.html:59
 msgid "Стать автором"
 msgstr "Be author"

@@ -80,6 +80,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
     'allauth.account.middleware.AccountMiddleware',
+    #для смены часового пояса
+    'News.middlewares.TimezoneMiddleware',
 ]
 
 ROOT_URLCONF = 'NewsPortal.urls'
@@ -145,7 +147,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-RU'
 
 LANGUAGES = [
     ('en', 'English'),
@@ -156,7 +158,7 @@ LOCALE_PATHS = [
     os.path.join(BASE_DIR, 'locale')
 ]
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
 
