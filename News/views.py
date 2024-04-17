@@ -40,7 +40,8 @@ class PostsList(ListView):
         return context
 
     def post(self, request):
-        request.session['django_timezone'] = request.POST['timezone']
+        if 'timezone' in request.POST:
+            request.session['django_timezone'] = request.POST['timezone']
         return redirect('post_list')
 
 

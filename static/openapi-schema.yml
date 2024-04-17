@@ -1,0 +1,85 @@
+openapi: 3.0.2
+info:
+  title: 'NewsPortal'
+  version: '1.0.0'
+paths:
+  /news/:
+    get:
+      operationId: ListNews
+      description: 'Получение новостей'
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Post'
+      tags:
+        - news
+
+  /news/{id}/:
+    get:
+      operationId: GetNewsById
+      description: 'Получение новости по id'
+      parameters:
+        - name: id
+          in: path
+          required: True
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Успешный запрос. Возвращается объект новости.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+        '404':
+          description: Новость с указанным id не найдена.
+      tags:
+        - news
+
+    post:
+      operationId: CreateNews
+      description: 'Создание новости'
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Post'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+      tags:
+        - news
+components:
+  schemas:
+    Post:
+      type: object
+      properties:
+        id:
+          type: integer
+        author:
+          type: string
+        type:
+          type: string
+        date_in:
+          type: string
+          format: date-time
+        category:
+          type: array
+          items:
+            type: string
+        title_of_news:
+          type: string
+        text:
+          type: string
+        rating:
+          type: integer

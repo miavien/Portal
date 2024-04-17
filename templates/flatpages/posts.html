@@ -2,13 +2,14 @@
 
 {% load custom_filters %}
 {% load custom_tags %}
+{% load i18n %}
 
 {% block title %}
 Posts
 {% endblock title %}
 
 {% block content %}
-   <h1>Все новости ({{ posts|length }})</h1>
+   <h1>{% trans "Все новости" %} ({{ posts|length }})</h1>
    <h4>{% current_time '%b %d %Y' %}</h4>
    <hr>
    {% if posts %}

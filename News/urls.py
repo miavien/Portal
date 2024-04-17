@@ -18,4 +18,8 @@ urlpatterns = [
    path('news/categories/<int:pk>', CategoryList.as_view(), name='category_list'),
    path('news/categories/<int:pk>/subscribe', subscribe, name='subscribe'),
    path('set-language/', set_language, name='set_language'),
+   path('swagger-ui/', TemplateView.as_view(
+      template_name='swagger-ui.html',
+      extra_context={'schema_url': 'openapi-schema'}
+   ), name='swagger-ui'),
 ]
