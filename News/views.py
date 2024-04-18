@@ -1,3 +1,4 @@
+import django_filters.rest_framework
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 from django.urls import reverse_lazy
@@ -6,11 +7,29 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import login_required
 from django.core.cache import cache
 import pytz
+from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
+from .serializers import *
 from .models import *
 from .filters import *
 from .forms import *
 
+
+class AuthorViewset(viewsets.ModelViewSet):
+    queryset = Author.objects.all()
+    serializer_class = AuthorSerializer
+
+class CategoryViewset(viewsets.ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+
+class PostViewset(viewsets.ModelViewSet):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+    filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
+    filter_fields = ['category']
+    permission_classes = (IsAuthenticatedOrReadOnly,)
 
 class PostDetail(DetailView):
     model = Post

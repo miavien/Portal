@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.yandex',
     'django_apscheduler',
+    'rest_framework',
 ]
 
 SITE_ID = 1
@@ -326,4 +327,10 @@ LOGGING = {
             'propagate': True,
         }
     },
+}
+
+REST_FRAMEWORK = {
+   'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+   'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+   'PAGE_SIZE': 10
 }
